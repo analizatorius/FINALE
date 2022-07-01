@@ -1,0 +1,16 @@
+{% extends "main/header.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container py-5, text-center">
+  <h1>Let the games begin</h1>
+</div>
+
+
+
+<a href="{% url "rocket_boost" %}">
+    <button style="width: 250px; height: 250px; margin: 100px;; background: url("/icons/rocket.png");">Rocket Boost</button>
+</a>
+
+
+{% endblock %}

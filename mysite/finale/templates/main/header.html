@@ -21,6 +21,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item float-right">
+            <a class="nav-link" href="{% url "games" %}">Games</a>
+          </li>
+
           {% if user.is_authenticated %}
           
           <li class="nav-item">
@@ -35,7 +40,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url "login" %}">Login</a>
           </li>
-
+          
           {% endif %}
         </ul>
       </div>

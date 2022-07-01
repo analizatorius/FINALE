@@ -55,3 +55,17 @@ def logout_request(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.") 
 	return redirect("index")
+
+
+def games_view(request):
+    return render(
+        request=request,
+        template_name="main/games.html",
+    )
+
+
+def rocket_boost_view(request):
+    return render(
+        request=request,
+        template_name="games/rocket_boost.html",
+    )
