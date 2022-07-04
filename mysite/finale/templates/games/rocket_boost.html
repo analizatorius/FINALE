@@ -2,7 +2,8 @@
 
 {% extends "main/header.html" %}
 {% block content %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags static %}
+
 
 
 <html lang="en-us">
@@ -12,11 +13,11 @@
     <title>Unity WebGL Player | 3_Project Boost_Udemy</title>
     <link
       rel="shortcut icon"
-      href= '/finale/game_files/rocket_boost/TemplateData/favicon.ico'
+      href="{% static '/finale/game_files/rocket_boost/TemplateData/favicon.ico' %}"
     />
     <link
       rel="stylesheet"
-      href= '/finale/game_files/rocket_boost/TemplateData/style.css'
+      href="{% static '/finale/game_files/rocket_boost/TemplateData/style.css' %}"
     />
   </head>
   <body>
@@ -70,7 +71,7 @@
         updateBannerVisibility();
       }
 
-      var buildUrl = '/finale/game_files/rocket_boost/Build';
+      var buildUrl = "{% static '/finale/game_files/rocket_boost/Build' %}";
       var loaderUrl = buildUrl + "/rocket_boost.loader.js";
       var config = {
         dataUrl: buildUrl + "/rocket_boost.data",
@@ -135,8 +136,8 @@
       };
       document.body.appendChild(script);
     </script>
-    {% comment %} <script src= '/finale/game_files/rocket_boost/Build/rocket_boost.loader.js'></script>
-    <script src= '/finale/game_files/rocket_boost/Build/rocket_boost.framework.js'></script> {% endcomment %}
+    {% comment %} <script src="{% static '/finale/game_files/rocket_boost/Build/rocket_boost.loader.js' %}"></script>
+    <script src="{% static '/finale/game_files/rocket_boost/Build/rocket_boost.framework.js' %}"></script> {% endcomment %}
   </body>
 </html>
 
