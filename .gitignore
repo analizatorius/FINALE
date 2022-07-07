@@ -2,3 +2,5 @@ venv/
 _pycache_/
 local_settings.py
 .gitignore
+db.sqlite3
+docker-compose.yml

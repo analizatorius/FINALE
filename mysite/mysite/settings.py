@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-from.local_settings import SECRET_KEY as s_key
+from .local_settings import SECRET_KEY as s_key, POSTGRES_PASSWORD
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,9 +82,13 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": "postgres",
+        "NAME": "finale",
+        "USER": "finale",
+        "PASSWORD": POSTGRES_PASSWORD,
+        "PORT": 5432
     }
 }
 
