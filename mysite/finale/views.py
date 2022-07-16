@@ -69,3 +69,10 @@ def rocket_boost_view(request):
         request=request,
         template_name="games/rocket_boost.html",
     )
+    
+    
+def rasa_bot_view(request):
+    return render(
+        request=request,
+        template_name="bots/rasa_bot.html",
+    )
