@@ -74,5 +74,5 @@ def rocket_boost_view(request):
 def rasa_bot_view(request):
     return render(
         request=request,
-        template_name="bots/rasa_bot.html",
+        template_name="bots/rasa_bot_3.html",
     )
