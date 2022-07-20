@@ -3,6 +3,7 @@ _pycache_/
 local_settings.py
 .gitignore
 db.sqlite3
-docker-compose.yml
 .env
-Dockerfile
+.rasa/
+.keras/
+.config/

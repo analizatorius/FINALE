@@ -1,0 +1,93 @@
+version: '3.7'
+services:
+  finale:
+    build: .
+    image: finale:dev
+    container_name: finale.dev
+    tty: true
+    stdin_open: true
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - ./mysite/:/app/mysite/
+    depends_on:
+      - db
+    links:
+      - db:postgres
+    command: >
+      bash -c "python wait_for_postgresql.py &&
+              python manage.py migrate &&
+              python manage.py collectstatic --noinput &&
+              gunicorn -b 0.0.0.0:8000 mysite.wsgi"
+  db:
+    image: postgres
+    container_name: postgres.finale
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_PORT: "${POSTGRES_PORT}"
+    # jei nori atskirai enviroment duomenis idet, kad nekelt i github
+    # env_file:
+    #   - database.env
+  nginx:
+    build: ./nginx/
+    image: nginx:finale
+    container_name: finale.nginx
+    restart: always
+    ports:
+      - 80:80
+    links:
+      - finale:finale
+    volumes:
+      - ./mysite/static:/app/static
+      - ./mysite/media:/app/media
+  rasa:
+    container_name: "rasa_server"
+    user: "1001"
+    build: ./rasa
+    image: rasa/rasa:3.2.2-full
+    ports:
+      - 5005:5005
+    expose:
+      - 5005
+    volumes:
+      - ./:/app
+      - ./data:/app/data
+      - ./models:/app/models
+    command:
+      - run  
+      # - -m  
+      # - /rasa/models
+      - --enable-api  
+      - --cors   
+      - "*"
+      # - --credentials
+      # - credentials.yml
+      # - --endpoints
+      # - endpoints.yml
+      - --debug
+    # command: >
+    #   bash -c "rasa train && rasa run --enable-api --cors='*' --endpoints endpoints.yml --log-file out.log --debug"
+  action_server:
+    container_name: "action_server"
+    user: "1001"
+    build: 
+        context: ./rasa/actions
+    ports:  
+      - 5055:5055
+    expose:
+      - 5055
+    volumes:  
+      - ./actions:/app/actions
+      - ./data:/app/data
+    command:  
+      - start
+      - --actions
+      - actions  
