@@ -1,3 +1,4 @@
+<<<<<<< HEAD
   steps:
   # running docker-compose
   - name: 'docker/compose:1.26.2'
@@ -5,3 +6,9 @@
     
   options:
     logging: CLOUD_LOGGING_ONLY
+=======
+#cloudbuild.yaml
+steps:
+- name: ‘docker/compose:4.9.1’
+  args: [‘up’, ‘-d’]
+>>>>>>> 12576f0 (cloud)
