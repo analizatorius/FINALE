@@ -1,10 +1,19 @@
-  steps:
+steps:
   # running docker-compose
-  - name: 'docker/compose:1.29.2'
-    args: ['up', '-d']
+  # - name: 'docker/compose:1.29.2'
+  #   args: ['up', '-d', "C:\Users\anali\Desktop\Python\Python studijos CAPT1\FINALE\docker-compose.yml"]
   
   # - name: 'gcr.io/cloud-builders/docker'
   #   args: ['build', '-t', 'gcr.io/cloudrun/placeholder', '.']
 
-options:
-  logging: CLOUD_LOGGING_ONLY
+# options:
+#   logging: CLOUD_LOGGING_ONLY
+
+  - name: "gcr.io/cloud-builders/docker"
+    # args:
+    #   [
+    #     "build",
+    #     "-t",
+    #     'gcr.io/cloudrun/placeholder',
+    #     "C:/Users/anali/Desktop/Python/Python studijos CAPT1/FINALE",
+    #   ]
