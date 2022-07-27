@@ -1,4 +1,4 @@
-  logsBucket: 'gs://finale_logs'
+  # logsBucket: 'gs://finale_logs'
   
   steps:
   # running docker-compose
