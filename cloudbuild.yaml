@@ -21,7 +21,7 @@ steps:
     args: ['push', 
            'eu.gcr.io/finale-357109/app-engine-tmp/app/default/ttl-18h:latest']
 options:
-  logging: CLOUD_LOGGING_ONLY
+  logging: NONE
 
 
 
