@@ -9,43 +9,40 @@
 
 
 # [START cloudbuild_basic_config]
-
-
-
-
-
-# steps:
-#   # Docker Build
-#   - name: 'gcr.io/cloud-builders/docker'
-#     args: ['build', '-t', 
-#            'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage', 
-#            '.']
-
-#   # Docker Push
-#   - name: 'gcr.io/cloud-builders/docker'
-#     args: ['push', 
-#            'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
-
-
-
-
-substitutions:
-  _DOCKER_COMPOSE_VERSION: 1.28.2
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args:
-  - 'build'
-  - '--build-arg'
-  - 'DOCKER_COMPOSE_VERSION=${_DOCKER_COMPOSE_VERSION}'
-  - '-t'
-  - 'gcr.io/$PROJECT_ID/docker-compose:latest'
-  - '-t'
-  - 'gcr.io/$PROJECT_ID/docker-compose:${_DOCKER_COMPOSE_VERSION}'
-  - '.'
-- name: 'gcr.io/$PROJECT_ID/docker-compose'
-  args: ['version']
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 
+           'eu.gcr.io/finale-357109/app-engine-tmp/app/default/ttl-18h:latest', 
+           '.']
 
-images:
-- 'gcr.io/$PROJECT_ID/docker-compose:latest'
-- 'gcr.io/$PROJECT_ID/docker-compose:${_DOCKER_COMPOSE_VERSION}'
-tags: ['cloud-builders-community']
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 
+           'eu.gcr.io/finale-357109/app-engine-tmp/app/default/ttl-18h:latest']
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+
+
+
+# substitutions:
+#   _DOCKER_COMPOSE_VERSION: 1.28.2
+# steps:
+# - name: 'gcr.io/cloud-builders/docker'
+#   args:
+#   - 'build'
+#   - '--build-arg'
+#   - 'DOCKER_COMPOSE_VERSION=${_DOCKER_COMPOSE_VERSION}'
+#   - '-t'
+#   - 'gcr.io/$PROJECT_ID/docker-compose:latest'
+#   - '-t'
+#   - 'gcr.io/$PROJECT_ID/docker-compose:${_DOCKER_COMPOSE_VERSION}'
+#   - '.'
+# - name: 'gcr.io/$PROJECT_ID/docker-compose'
+#   args: ['version']
+
+# images:
+# - 'gcr.io/$PROJECT_ID/docker-compose:latest'
+# - 'gcr.io/$PROJECT_ID/docker-compose:${_DOCKER_COMPOSE_VERSION}'
+# tags: ['cloud-builders-community']
