@@ -1,12 +1,51 @@
   # logsBucket: 'gs://finale_logs'
   
-  steps:
-  # running docker-compose
-  - name: 'docker/compose:1.29.2'
-    args: ['up', '-d']
-  
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args: ['build', '-t', 'gcr.io/cloudrun/placeholder', '.']
+# steps:
+#   - name: 'docker/compose:1.29.2'
+#     args: ['up', '-d']
 
-options:
-  logging: CLOUD_LOGGING_ONLY
+# options:
+#   logging: CLOUD_LOGGING_ONLY
+
+
+# [START cloudbuild_basic_config]
+
+
+
+
+
+# steps:
+#   # Docker Build
+#   - name: 'gcr.io/cloud-builders/docker'
+#     args: ['build', '-t', 
+#            'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage', 
+#            '.']
+
+#   # Docker Push
+#   - name: 'gcr.io/cloud-builders/docker'
+#     args: ['push', 
+#            'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
+
+
+
+
+substitutions:
+  _DOCKER_COMPOSE_VERSION: 1.28.2
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - 'build'
+  - '--build-arg'
+  - 'DOCKER_COMPOSE_VERSION=${_DOCKER_COMPOSE_VERSION}'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/docker-compose:latest'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/docker-compose:${_DOCKER_COMPOSE_VERSION}'
+  - '.'
+- name: 'gcr.io/$PROJECT_ID/docker-compose'
+  args: ['version']
+
+images:
+- 'gcr.io/$PROJECT_ID/docker-compose:latest'
+- 'gcr.io/$PROJECT_ID/docker-compose:${_DOCKER_COMPOSE_VERSION}'
+tags: ['cloud-builders-community']
