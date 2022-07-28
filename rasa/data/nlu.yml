@@ -89,3 +89,28 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+- intent: give_time
+  examples: |
+    - can you tell me what the time is
+    - tell me the time
+    - got the time
+    - what tome is it
+    - what's the time
+
+- intent: give_weather
+  examples: |
+    - what's the weather
+    - how is weather today
+    - tell me weather forecast
+    - what is forecast for today
+    - i want to know weather today
+
+- intent: city
+  examples: |
+    - london
+    - kaunas
+    - vilnius
+    - klaipeda
+    - siauliai
+    - dehli
