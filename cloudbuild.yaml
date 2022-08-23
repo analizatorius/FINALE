@@ -1,48 +1,19 @@
-  # logsBucket: 'gs://finale_logs'
+steps:
+  running docker-compose
+  - name: 'docker/compose:1.29.2'
+    args: ['up', '-d', "docker-compose.yml"]
   
-# steps:
-#   - name: 'docker/compose:1.29.2'
-#     args: ['up', '-d']
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['build', '-t', 'gcr.io/cloudrun/placeholder', '.']
 
 # options:
 #   logging: CLOUD_LOGGING_ONLY
 
-
-# [START cloudbuild_basic_config]
-steps:
-  # Docker Build
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 
-           'eu.gcr.io/finale-357109/app-engine-tmp/app/default/ttl-18h:latest', 
-           '.']
-
-  # Docker Push
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 
-           'eu.gcr.io/finale-357109/app-engine-tmp/app/default/ttl-18h:latest']
-options:
-  logging: NONE
-
-
-
-
-# substitutions:
-#   _DOCKER_COMPOSE_VERSION: 1.28.2
-# steps:
-# - name: 'gcr.io/cloud-builders/docker'
-#   args:
-#   - 'build'
-#   - '--build-arg'
-#   - 'DOCKER_COMPOSE_VERSION=${_DOCKER_COMPOSE_VERSION}'
-#   - '-t'
-#   - 'gcr.io/$PROJECT_ID/docker-compose:latest'
-#   - '-t'
-#   - 'gcr.io/$PROJECT_ID/docker-compose:${_DOCKER_COMPOSE_VERSION}'
-#   - '.'
-# - name: 'gcr.io/$PROJECT_ID/docker-compose'
-#   args: ['version']
-
-# images:
-# - 'gcr.io/$PROJECT_ID/docker-compose:latest'
-# - 'gcr.io/$PROJECT_ID/docker-compose:${_DOCKER_COMPOSE_VERSION}'
-# tags: ['cloud-builders-community']
+  # - name: "gcr.io/cloud-builders/docker"
+    # args:
+    #   [
+    #     "build",
+    #     "-t",
+    #     'gcr.io/cloudrun/placeholder',
+    #     "C:/Users/anali/Desktop/Python/Python studijos CAPT1/FINALE",
+    #   ]

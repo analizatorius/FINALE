@@ -8,3 +8,4 @@ db.sqlite3
 .keras/
 .config/
 dbdata/
+_temp/
