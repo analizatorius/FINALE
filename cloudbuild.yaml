@@ -1,19 +1,10 @@
 steps:
-  running docker-compose
-  - name: 'docker/compose:1.29.2'
-    args: ['up', '-d', "docker-compose.yml"]
-  
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args: ['build', '-t', 'gcr.io/cloudrun/placeholder', '.']
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
 
-# options:
-#   logging: CLOUD_LOGGING_ONLY
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
 
-  # - name: "gcr.io/cloud-builders/docker"
-    # args:
-    #   [
-    #     "build",
-    #     "-t",
-    #     'gcr.io/cloudrun/placeholder',
-    #     "C:/Users/anali/Desktop/Python/Python studijos CAPT1/FINALE",
-    #   ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/finalerep:latest', '.']
+
